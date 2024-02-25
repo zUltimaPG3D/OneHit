@@ -14,38 +14,36 @@ public class OneHitHandler : MonoBehaviour
 		if (e) {
 			if (e.health > SET_HP)
 				e.health = SET_HP;
-		}
+			
+			if (e.zombie) {
+				if (e.zombie.health > SET_HP)
+					e.zombie.health = SET_HP;
+				return;
+			}
+					
+			if (e.spider) {
+				if (e.spider.health > SET_HP)
+					e.spider.health = SET_HP;
+				return;
+			}
 
-		if (e.zombie) {
-			if (e.zombie.health > SET_HP)
-				e.zombie.health = SET_HP;
-		}
-				
-		if (e.spider) {
-			if (e.spider.health > SET_HP)
-				e.spider.health = SET_HP;
-		}
+			if (e.drone) {
+				if (e.drone.health > SET_HP)
+					e.drone.health = SET_HP;
+				return;
+			}
 
-		if (e.drone) {
-			if (e.drone.health > SET_HP)
-				e.drone.health = SET_HP;
+			if (e.machine) {
+				if (e.machine.health > SET_HP)
+					e.machine.health = SET_HP;
+				return;
+			}
+					
+			if (e.statue) {
+				if (e.statue.health > SET_HP)
+					e.statue.health = SET_HP;
+				return;
+			}
 		}
-
-		if (e.machine) {
-			if (e.machine.health > SET_HP)
-				e.machine.health = SET_HP;
-		}
-				
-		if (e.statue) {
-			if (e.statue.health > SET_HP)
-				e.statue.health = SET_HP;
-		}
-	}
-
-	private void LateUpdate() {
-		if (isOn.Value)
-			if (NewMovement.Instance)
-				if (NewMovement.Instance.hp > 1)
-					NewMovement.Instance.hp = 1;
 	}
 }
