@@ -2,5 +2,5 @@ public class PluginData
 {
     public const string GUID = "com.ssar.onehit";
     public const string Name = "One Hit";
-    public const string Version = "1.0.0";
+    public const string Version = "1.2.0";
 }
