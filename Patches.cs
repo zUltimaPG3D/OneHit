@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using HarmonyLib;
 
 public class Patches 
@@ -12,44 +13,24 @@ public class Patches
 		return false;
 	}
 
-	[HarmonyPatch(typeof(EnemyIdentifier), "Update")]
-	[HarmonyPostfix]
-	public static void p_EnemyIdentifier_Update(ref EnemyIdentifier __instance)
-	{
-		if (OneHitHandler.isOn.Value) {
-			OneHitHandler.UpdateEID(__instance);
-		}
-	}
-
-	[HarmonyPatch(typeof(NewMovement), "GetHealth")]
+	[HarmonyPatch(typeof(NewMovement), "GetHurt")]
 	[HarmonyPrefix]
-	public static bool p_NewMovement_GetHealth(ref NewMovement __instance)
+	public static bool p_NewMovement_GetHurt(ref NewMovement __instance, ref int __0)
 	{
-		if (OneHitHandler.isOn.Value) {
-			__instance.hp = 1;
-			return false;
+		if (OneHitHandler.isOn.Value && __0 != 0) {
+			__0 = int.MaxValue;
 		}
 		return true;
 	}
 
-	[HarmonyPatch(typeof(NewMovement), "Start")]
-	[HarmonyPostfix]
-	public static void p_NewMovement_Start(ref NewMovement __instance)
+	[HarmonyPatch(typeof(EnemyIdentifier), "DeliverDamage")]
+	[HarmonyPrefix]
+	public static bool p_EnemyIdentifier_DeliverDamage(ref EnemyIdentifier __instance, ref float __3)
 	{
-		if (OneHitHandler.isOn.Value) {
-			__instance.hp = 1;
+		if (OneHitHandler.isOn.Value && __3 != 0) {
+			__3 = int.MaxValue;
 		}
-	}
-
-	[HarmonyPatch(typeof(DisabledEnemiesChecker), "Update")]
-	[HarmonyPostfix]
-	public static void p_DisabledEnemiesChecker_Update(ref DisabledEnemiesChecker __instance)
-	{
-		if (OneHitHandler.isOn.Value) {
-			if (__instance.gameObject.name.Contains("Invisible")) {
-				__instance.gameObject.SetActive(false);
-			}
-		}
+		return true;
 	}
 
 	[HarmonyPatch(typeof(GameStateManager), "CanSubmitScores", MethodType.Getter)]

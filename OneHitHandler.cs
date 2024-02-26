@@ -8,42 +8,4 @@ public class OneHitHandler : MonoBehaviour
 {
 	[Configgable(displayName: "Is enabled?")]
 	public static ConfigToggle isOn = new(true);
-	public static float SET_HP = .25f;
-
-	public static void UpdateEID(EnemyIdentifier e) {
-		if (e) {
-			if (e.health > SET_HP)
-				e.health = SET_HP;
-			
-			if (e.zombie) {
-				if (e.zombie.health > SET_HP)
-					e.zombie.health = SET_HP;
-				return;
-			}
-					
-			if (e.spider) {
-				if (e.spider.health > SET_HP)
-					e.spider.health = SET_HP;
-				return;
-			}
-
-			if (e.drone) {
-				if (e.drone.health > SET_HP)
-					e.drone.health = SET_HP;
-				return;
-			}
-
-			if (e.machine) {
-				if (e.machine.health > SET_HP)
-					e.machine.health = SET_HP;
-				return;
-			}
-					
-			if (e.statue) {
-				if (e.statue.health > SET_HP)
-					e.statue.health = SET_HP;
-				return;
-			}
-		}
-	}
 }
