@@ -3,16 +3,6 @@ using HarmonyLib;
 
 public class Patches 
 {
-	[HarmonyPatch(typeof(SwordsMachine), "EndFirstPhase")]
-	[HarmonyPrefix]
-	public static bool p_EndFirstPhase()
-	{
-		if (!OneHitHandler.isOn.Value) {
-			return true;
-		}
-		return false;
-	}
-
 	[HarmonyPatch(typeof(NewMovement), "GetHurt")]
 	[HarmonyPrefix]
 	public static bool p_NewMovement_GetHurt(ref NewMovement __instance, ref int __0)
